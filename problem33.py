@@ -16,7 +16,7 @@ def binarySearch(a, i, j, target):
 	return -1
 
 def search(nums, target):
-	print nums, target
+	#print nums, target
 	i = 0
 	j = len(nums) - 1
 	a = nums[:]
@@ -35,12 +35,13 @@ def search(nums, target):
 	else:
 		return binarySearch(nums, 0, j - 1, target)
 	
-	
+def testSearch():
+	print search([5, 6, 7, 8, 0, 1, 2, 3, 4], 7)
+	print search([1,3,5,7], 1)
+	print search([1,3,5,7], 0)
+	print search([1,3,5,7], 2)
+	print search([1,3,5,7], 4)
+	print search([1,3,5,7], 7)
 
-print search([5, 6, 7, 8, 0, 1, 2, 3, 4], 7)
-	
-print search([1,3,5,7], 1)
-print search([1,3,5,7], 0)
-print search([1,3,5,7], 2)
-print search([1,3,5,7], 4)
-print search([1,3,5,7], 7)
+import cProfile
+cProfile.run('testSearch()')
