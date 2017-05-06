@@ -29,7 +29,7 @@ def search(nums, target):
 			i = k
 		if a[k] < a[j]:
 			j = k
-	# j is the shift
+	# j is the pivot since a[i] < a[j]
 	if a[0] > target:
 		return binarySearch(nums, j, len(nums) - 1, target)
 	else:
