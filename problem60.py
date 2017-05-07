@@ -18,9 +18,9 @@ def getPermutation(n, k):
 	while k > 0:
 		d = int(math.ceil(float(k) / f[n -1]))
 		
-		print int(d), k, f[n], k % f[n - 1]
+		print int(d), k, f[n], k - (d-1)*f[n - 1]
 		#digits.remove(d)
-		k %= f[n - 1]
+		k -= (d-1)*f[n - 1]
 		n -= 1
 	print digits
 		

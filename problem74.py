@@ -26,18 +26,21 @@ def searchMatrix(matrix, target):
 	if nCol == 0:
 		return False
 		
-	for i in xrange(nRow):
-		if matrix[i][0] == target:
+	i = 0
+	j = nRow - 1
+	while matrix[i][0] < matrix[j][0] and i != j and i + 1 != j:
+		k = (i + j) / 2
+		if matrix[k][0] > target:
+			j = k
+		if matrix[k][0] < target:
+			i = k
+		if matrix[k][0] == target:
 			return True
-		if matrix[i][0] > target:
-			if i == 0:
-				return False
-			if binarySearch(matrix[i - 1], 0, nCol - 1, target) != -1:
-				return True
-			return False
-	if matrix[nRow - 1][nCol - 1] >= target:
-		if binarySearch(matrix[i], 0, nCol - 1, target) != -1:
-			return True
+			
+	if binarySearch(matrix[i], 0, nCol - 1, target) != -1:
+		return True
+	if binarySearch(matrix[j], 0, nCol - 1, target) != -1:
+		return True
 	return False
 	
 print searchMatrix([[1,   3,  5,  7],
