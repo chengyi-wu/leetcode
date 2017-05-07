@@ -18,7 +18,8 @@ class Tree(object):
 			return
 		
 		parent = self.root
-		while parent.left != None or parent.right != None:
+		#print parent, parent.left, parent.right
+		while parent.left != None and parent.right != None:
 			if parent.val < v:
 				parent = parent.right
 				print parent
@@ -36,6 +37,7 @@ class Tree(object):
 		return self.root
 		
 def preOrder(n):
+	#print n
 	if n.left != None:
 		preOrder(n.left)
 	if n.right != None:
@@ -46,7 +48,7 @@ def preOrder(n):
 			
 def testBST():
 	t = Tree()
-	for i in range(1,5):
+	for i in [2,1,3]:
 		t.insert(i)
 	print t.root, t.root.left, t.root.right
 	preOrder(t.root)
