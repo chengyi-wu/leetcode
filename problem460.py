@@ -54,10 +54,11 @@ class PriorityQueue(object):
 		self.bucket[i] = self.bucket[j]
 		self.bucket[j] = temp
 		
-		self.keyIndex[self.bucket[i]] = i
-		self.keyIndex[self.bucket[j]] = j
+		self.keyIndex[self.bucket[i].key] = i
+		self.keyIndex[self.bucket[j].key] = j
 		
 	def minify(self):
+		print "MINIFY"
 		for i in range(self.size - 1, self.size / 2 - 1, -1):
 			parent = self.getParent(i)
 			if self.bucket[parent].val > self.bucket[i].val:
@@ -90,8 +91,9 @@ class PriorityQueue(object):
 	def get(self, key):
 		if key not in self.keyIndex:
 			return -1
-		i = self.keyIndex[key]
-		return self.hashtable[i]
+		self.increaseKey(key)
+		self.check()
+		return self.hashtable[key]
 		
 
 class LFUCache(object):
