@@ -1,5 +1,7 @@
 def numDecodings(s, memo):
 	#print s
+	if s in memo:
+		return memo[s]
 	if len(s) == 0:
 		return 0
 	if len(s) == 1:
@@ -7,17 +9,17 @@ def numDecodings(s, memo):
 			return 1
 		return 0
 	if len(s) == 2:
-		if s in memo:
-			return memo[s]
 		if int(s) < 10:
-			memo[s] = 0
 			return 0
 		if int(s) == 10 or int (s) == 20:
-			memo[s] = 1
 			return 1
 		if int(s) < 27:
 			memo[s] = 2
 			return 2
+		if int(s[0]) > 2:
+			print s
+			#memo[s] = 0
+			return 0
 		memo[s] = 1
 		return 1
 	n = 0
@@ -31,6 +33,6 @@ def numDecodings(s, memo):
 	
 import cProfile
 s = "4757562545844617494555774581341211511296816786586787755257741178599337186486723247528324612117156948"
+#s = "230"
 memo = { }
 cProfile.run('print numDecodings(s, memo)')
-print memo
