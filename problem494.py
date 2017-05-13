@@ -1,5 +1,8 @@
 import cProfile
 def findTargetSumWays(i, nums, S, memo):
+	'''
+	https://leetcode.com/problems/target-sum/#/description
+	'''
 	k = (i, S)
 	if k in memo:
 		return memo[k]
