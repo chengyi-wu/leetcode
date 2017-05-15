@@ -9,28 +9,34 @@ def isPalindrome(s, memo):
 	return True
 
 def longestPalindromeSubseq(s):
-	cache = []
-	for c in s:
-		cache.append(c)
+	cache = list(s)
 	longest = ""
 	memo = { }
 	for i in range(len(s)):
 		cache[i] = s[i]
+		currentLongest = s[i]
 		for j in range(i + 1, len(s)):
 			cache[j] = cache[j - 1] + s[j]
 			if len(cache[j]) > len(longest):
 				if isPalindrome(cache[j], memo):
-					longest = cache[j]
-				elif isPalindrome(longest + s[j], memo):
-					longest += s[j]
+					currentLongest = cache[j]
+				elif isPalindrome(currentLongest + s[j], memo):
+					currentLongest += s[j]
+			if len(longest) < len(currentLongest):
+				longest = currentLongest
 		#print cache[i:]
-	print memo			
+	#print memo			
 	return longest
 	
 def test_longestPalindromeSubseq(s):
+	print len(s)
 	print longestPalindromeSubseq(s)
 	
-test_longestPalindromeSubseq("bbabbb")
-test_longestPalindromeSubseq("bbbabbb")
-test_longestPalindromeSubseq("bbbabb")
-test_longestPalindromeSubseq("cbbd")
+import cProfile
+s = "bbbab"
+s *= 180
+#print s
+cProfile.run('test_longestPalindromeSubseq(s)')
+#test_longestPalindromeSubseq("bbbabbb")
+#test_longestPalindromeSubseq("bbbabb")
+#test_longestPalindromeSubseq("cbbd")
