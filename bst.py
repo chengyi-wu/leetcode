@@ -1,127 +1,124 @@
-class TreeNode(object):
-		def __init__(self, v):
-			self.val = v
+class BST(object):
+	class TreeNode(object):
+		def __init__(self, k):
+			self.key = k
 			self.left = None
 			self.right = None
 		def __str__(self):
-			return str(self.val)
-
-class Tree(object):
+			return str(self.key)
+			
 	def __init__(self):
 		self.root = None
-	def insert(self, v):
-		#print "insert", v
-		node = TreeNode(v)
 		
-		parent = None
+	def rsearch(self, k, n):
+		'''
+		Recursive version of binary search
+		'''
+		if n == None:
+			return None
+		if n.key == key:
+			return n
+		if n.key < k:
+			return self.search(k, n.right)
+		else:
+			return self.search(k, n.left)
+			
+	def search(self, k):
+		'''
+		Iterative version of binary search
+		'''
 		n = self.root
-		while n != None:
-			parent = n
-			if v > n.val:
+		while n!= None and n.key != k:
+			if n.key < k:
 				n = n.right
 			else:
 				n = n.left
 				
-		if parent == None:
-			self.root = node
-		else:
-			#print parent
-			if v > parent.val:
-				parent.right = node
+		if n.key == k:
+			return n
+		return None
+	
+	def min(self):
+		'''
+		Iterative version
+		'''
+		n = self.root
+		if n == None:
+			return None
+		while n.left != None:
+			n = n.left
+			
+		return n
+		
+	def max(self):
+		n = self.root
+		if n == None:
+			return None
+		while n.right != None:
+			n = n.right
+		return n
+
+	def rinsert(self, k, n = None):
+		'''
+		Recursive version of insert
+		'''
+		if n == None:
+			if self.root == None:
+				self.root = self.TreeNode(k)
+				return
+			return self.rinsert(k, self.root)
+			
+		if k > n.key:
+			if n.right == None:
+				n.right = self.TreeNode(k)
 			else:
-				parent.left = node
-		
-			
-	def getRoot(self):
-		return self.root
-		
-def inOrder(root):
-	n = root
-
-		
-
-def isValidRightChild(path, node):
-	i = len(path) - 1
-	n = node
-	parent = path[i]
-	while i > 0 and n != parent.left:
-		i -= 1
-		n = parent
-		parent = path[i]
-	return node.right.val < parent.val
-	
-def isValidBSTHelper(path, n):
-	#print "checking", str(n)
-	leftValid = True
-	rightValid = True
-	
-	#check the left & right children
-	if n.left != None:
-		if n.left.val > n.val:
-			leftValid = False
+				self.rinsert(k, n.right)
 		else:
-			leftValid = isValidBSTHelper(path + [n], n.left)
-	
-	if n.right != None:
-		if n.right.val < n.val:
-			rightValid = False
+			if n.left == None:
+				n.left = self.TreeNode(k)
+			else:
+				self.rinsert(k, n.left)
+				
+	def insert(self, k):
+		'''
+		Iterative version of insert
+		'''
+		#print "insert", k
+		parent = None
+		n = self.root
+		while n != None:
+			parent = n
+			if k > n.key:
+				n = n.right
+			else:
+				n = n.left
+		if parent == None:
+			self.root = self.TreeNode(k)
 		else:
-			rightValid = isValidBSTHelper(path + [n], n.right)
-			
-	if (leftValid and rightValid) == False:
-		print "EARLY VIOLATION!!!"
-		return False
-	#check the path for violation
-	i = len(path) - 1
-	while i > 0:
-		if path[i] == path[i - 1].left and n.val >= path[i - 1].val:
-			print "VIOLATING!!!",  n.val, path[i-1].val
-			return False
-		if path[i] == path[i - 1].right and n.val <= path[i - 1].val:
-			print "VIOLATING!!!", n.val, path[i-1].val
-			return False
-		i -= 1
-	
-	return True
-	
-def isValidBST(root):
-	if root == None:
-		return True
-	leftValid = True
-	rightValid = True
-	if root.left != None:
-		if root.val <= root.left.val:
-			return False
-		leftValid = isValidBSTHelper([root], root.left)
-	if root.right != None:
-		if root.val >= root.right.val:
-			return False
-		rightValid = isValidBSTHelper([root], root.right)
-	return leftValid and rightValid
+			if k > parent.key:
+				parent.right = self.TreeNode(k)
+			else:
+				parent.left = self.TreeNode(k)
+				
+	def traverse(self, n):
+		if n == None:
+			return
+		self.traverse(n.left)
+		print n,
+		self.traverse(n.right)
 		
-			
-def testBST():
-	root = TreeNode(10)
-	root.left = TreeNode(5)
-	root.left.left = TreeNode(1)
-	root.right = TreeNode(15)
-	root.right.left = TreeNode(2)
-	root.right.right = TreeNode(20)
+		
 	
-	print isValidBST(root)
-	
-def testBST2():
-	root = TreeNode(3)
-	root.left = TreeNode(1)
-	root.right = TreeNode(5)
-	root.left.left = TreeNode(0)
-	root.left.right = TreeNode(2)
-	root.left.right.right = TreeNode(3)
-	#root.right.right = TreeNode(20)
-	
-	print isValidBST(root)
-	
-	
-import cProfile
-cProfile.run('testBST()')
-cProfile.run('testBST2()')
+	def delete(k):
+		return
+		
+def test_BST():
+	tree = BST()
+	tree.insert(2)
+	tree.insert(1)
+	tree.insert(3)
+	tree.insert(4)
+	#print str(tree.root), str(tree.root.left), str(tree.root.right), str(tree.root.right.right)
+	tree.traverse(tree.root)
+
+test_BST()
