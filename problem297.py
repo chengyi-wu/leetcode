@@ -1,5 +1,5 @@
 '''
-The serialization of BST can be done by using PREORDER and INORDER of the BST
+The serialization of general binary tree can be done by using PREORDER and INORDER of the BST
 '''
 class TreeNode(object):
     def __init__(self, x):
