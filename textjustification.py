@@ -4,3 +4,4 @@ https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-in
 Subproblems: Where the 2nd line begins. (word[i:])
 
 '''
+def fullJustify(words, maxWidth):
