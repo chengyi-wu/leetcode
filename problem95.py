@@ -33,7 +33,7 @@ def buildTree(inorder):
 def numTrees(n):
     if n == 0:
         return []
-    inorder = [str(x) for x in range(1, n + 1)]
+    inorder = [x for x in range(1, n + 1)]
     return buildTree(inorder)
 
 def preorderWalk(n):
