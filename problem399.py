@@ -47,8 +47,6 @@ def calcEquation(equations, values, queries):
         weight[k] = values[i]
         vertices.append(e[0])
         vertices.append(e[1])
-
-
     results = []
     for q in queries:
         if q[0] == q[1]:
