@@ -25,8 +25,8 @@ def bfs(numCourses, edges):
     '''
     https://en.wikipedia.org/wiki/Topological_sorting#Algorithms
     Topological_sorting using BFS, Kahn's algorithm
-    L ← Empty list that will contain the sorted elements
-    S ← Set of all nodes with no incoming edges
+    L <- Empty list that will contain the sorted elements
+    S <- Set of all nodes with no incoming edges
     while S is non-empty do
         remove a node n from S
         add n to tail of L
