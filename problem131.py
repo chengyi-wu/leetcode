@@ -26,8 +26,8 @@ def partition(s, memo = { }):
 def test(s):
     results = partition(s)
     print len(results)
-    print results
-
+    #print results
+test("kwtbjmsjvbrwriqwxadwnufplszhqccayvdhhvscxjaqsrmrrqngmuvxnugdzjfxeihogzsdjtvdmkudckjoggltcuybddbjoizu")
 test("aab")
 test("babb")
 test("aabb")
