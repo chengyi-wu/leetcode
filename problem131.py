@@ -1,10 +1,13 @@
 def isPalindrome(s):
+    #print "isPalindrome(%s)"%s
     for i in range(len(s) / 2):
         if s[i] != s[len(s) - 1 - i]:
             return False
     return True
 
-def partition(s):
+def partition(s, memo = { }):
+    if s in memo:
+        return memo[s]
     if len(s) == 1:
         return [[s]]
     results = []
@@ -17,6 +20,7 @@ def partition(s):
             right = partition(s[i:])
             for r in right:
                 results.append([left] + r)
+    memo[s] = results
     return results
 
 def test(s):
@@ -24,7 +28,7 @@ def test(s):
     print len(results)
     print results
 
-print test("aab")
-print test("babb")
-print test("aabb")
-print test("bbabb")
+test("aab")
+test("babb")
+test("aabb")
+test("bbabb")
