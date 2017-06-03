@@ -1,42 +1,51 @@
-def isPalindrome(s, memo):
+def longestPalindromeSubseq(s, memo = { }):
 	if s in memo:
 		return memo[s]
-	for i in range(len(s)/2 + 1):
-		if s[i] != s[len(s) - 1 - i]:
-			memo[s] = False
-			return False
-	memo[s] = True
-	return True
+	if len(s) == 0 or len(s) == 1:
+		return len(s)
+	if s[0] == s[-1]:
+		if len(s) == 2:
+			return 2
+		else:
+			memo[s] = 2 + longestPalindromeSubseq(s[1:-1], memo)
+			return memo[s]
+	memo[s] = max(longestPalindromeSubseq(s[1:], memo), longestPalindromeSubseq(s[:-1], memo))
+	return memo[s]
 
-def longestPalindromeSubseq(s):
-	cache = list(s)
-	longest = ""
-	memo = { }
-	for i in range(len(s)):
-		cache[i] = s[i]
-		currentLongest = s[i]
-		for j in range(i + 1, len(s)):
-			cache[j] = cache[j - 1] + s[j]
-			if len(cache[j]) > len(longest):
-				if isPalindrome(cache[j], memo):
-					currentLongest = cache[j]
-				elif isPalindrome(currentLongest + s[j], memo):
-					currentLongest += s[j]
-			if len(longest) < len(currentLongest):
-				longest = currentLongest
-		#print cache[i:]
-	#print memo			
-	return longest
-	
+def longestPalindromeSubseq2(s):
+	'''
+	Same code in C gets accepted and beats 80%, but the python code always failed.
+	'''
+	size = len(s)
+	dp = [0] * (size + 1)
+	for i in reversed(range(size)):
+		current = dp[:]
+		for j in range(size):
+			if i == j:
+				current[j + 1] = 1
+			else:
+				if s[i] == s[j]:
+					if i + 1 == j:
+						current[j + 1] = 2
+					else:
+						current[j + 1] = 2 + dp[j]
+				else:
+					current[j + 1] = max(current[j], dp[j + 1])
+		dp = current
+		#print dp
+	return dp[size]
+
+
 def test_longestPalindromeSubseq(s):
-	print len(s)
-	print longestPalindromeSubseq(s)
-	
-import cProfile
-s = "bbbab"
-s *= 180
+	#print len(s)
+	print longestPalindromeSubseq2(s)
+	#print longestPalindromeSubseq(s)
+
+
+s = "gphyvqruxjmwhonjjrgumxjhfyupajxbjgthzdvrdqmdouuukeaxhjumkmmhdglqrrohydrmbvtuwstgkobyzjjtdtjroqpyusfsbjlusekghtfbdctvgmqzeybnwzlhdnhwzptgkzmujfldoiejmvxnorvbiubfflygrkedyirienybosqzrkbpcfidvkkafftgzwrcitqizelhfsruwmtrgaocjcyxdkovtdennrkmxwpdsxpxuarhgusizmwakrmhdwcgvfljhzcskclgrvvbrkesojyhofwqiwhiupujmkcvlywjtmbncurxxmpdskupyvvweuhbsnanzfioirecfxvmgcpwrpmbhmkdtckhvbxnsbcifhqwjjczfokovpqyjmbywtpaqcfjowxnmtirdsfeujyogbzjnjcmqyzciwjqxxgrxblvqbutqittroqadqlsdzihngpfpjovbkpeveidjpfjktavvwurqrgqdomiibfgqxwybcyovysydxyyymmiuwovnevzsjisdwgkcbsookbarezbhnwyqthcvzyodbcwjptvigcphawzxouixhbpezzirbhvomqhxkfdbokblqmrhhioyqubpyqhjrnwhjxsrodtblqxkhezubprqftrqcyrzwywqrgockioqdmzuqjkpmsyohtlcnesbgzqhkalwixfcgyeqdzhnnlzawrdgskurcxfbekbspupbduxqxjeczpmdvssikbivjhinaopbabrmvscthvoqqbkgekcgyrelxkwoawpbrcbszelnxlyikbulgmlwyffurimlfxurjsbzgddxbgqpcdsuutfiivjbyqzhprdqhahpgenjkbiukurvdwapuewrbehczrtswubthodv"
+#s *= 200
 #print s
-cProfile.run('test_longestPalindromeSubseq(s)')
-#test_longestPalindromeSubseq("bbbabbb")
+#s = "bbab"
+test_longestPalindromeSubseq(s)
 #test_longestPalindromeSubseq("bbbabb")
 #test_longestPalindromeSubseq("cbbd")
