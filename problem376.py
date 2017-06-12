@@ -3,7 +3,8 @@ https://leetcode.com/submissions/detail/105796865/
 '''
 
 def helper(left, right, i, nums, memo):
-    k = (left, right)
+    #k = (left, right)
+    k = left
     if k in memo:
         return memo[k]
     #print left, right
