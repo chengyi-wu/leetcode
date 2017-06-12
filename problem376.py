@@ -1,5 +1,5 @@
 '''
-https://leetcode.com/problems/partition-equal-subset-sum/#/description
+https://leetcode.com/submissions/detail/105796865/
 '''
 
 def helper(left, right, i, nums, memo):
@@ -10,11 +10,17 @@ def helper(left, right, i, nums, memo):
     if i == len(nums) :
         #print left, right
         return left == right
-    memo[k] = helper(left + nums[i], right - nums[i], i + 1, nums, memo) \
+    result = helper(left + nums[i], right - nums[i], i + 1, nums, memo) \
         or helper(left, right, i + 1, nums, memo)
-    return memo[k]
+    if result:
+        return True
+    memo[k] = result
+    return result
 
 def canPartition(nums):
+    '''
+    https://leetcode.com/problems/partition-equal-subset-sum/#/description
+    '''
     #nums.sort()
     return helper(0, sum(nums), 0, nums, { })
 
