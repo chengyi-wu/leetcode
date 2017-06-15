@@ -1,27 +1,26 @@
 def maximalSquare(matrix):
     row = len(matrix)
     col = len(matrix[0])
-    cache = []
     square = 0
     for i in range(row):
-        cache.append([0] * col)
+        current = [0] * col
         for j in range(col):
             if i == 0:
-                cache[i][j] = int(matrix[i][j])
+                current[j] = int(matrix[i][j])
             elif j == 0:
-                cache[i][j] = int(matrix[i][j])
+                current[j] = int(matrix[i][j])
             else:
                 if matrix[i][j] == '1' and matrix[i - 1][j - 1] == '1' :
-                    cache[i][j] = 0
-                    for k in range(cache[i - 1][j - 1] + 1):
+                    current[j] = 0
+                    for k in range(cache[j - 1] + 1):
                         if matrix[i - k][j] == '0' or matrix[i][j - k] == '0' or i - k < 0 or j - k < 0:
                             break
-                        cache[i][j] += 1
+                        current[j] += 1
                 else:
-                    cache[i][j] = int(matrix[i][j])
-            square = max(cache[i][j], square)
-        print cache[i]
-        #print matrix[i]
+                    current[j] = int(matrix[i][j])
+            square = max(current[j], square)
+        cache = current
+        print cache
     return square * square
 
 def test():
