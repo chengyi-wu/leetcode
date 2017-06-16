@@ -27,10 +27,8 @@ def generateParenthesis2(n):
     Bottom-up solution. Rewrite for the top-down one. It's faster.
     https://leetcode.com/submissions/detail/106252895/
     '''
-    cache = []
-    cache.append([''])
-    cache.append(['()'])
-    for i in range(2, n + 1):
+    cache = [['']]
+    for i in range(1, n + 1):
         cache.append([])
         for k in range(i):
             for a in cache[k]:
