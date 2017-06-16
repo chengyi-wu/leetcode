@@ -25,8 +25,11 @@ def maximalSquare(matrix):
 
 def test():
     matrix = ["10100","10111","11111","10010"]
-    #matrix = ["0001","1101","1111","0111","0111"]
+    print maximalSquare(matrix)
+    matrix = ["0001","1101","1111","0111","0111"]
+    print maximalSquare(matrix)
     matrix = ["1111","1111","1111"]
+    print maximalSquare(matrix)
     matrix = ["01101","11010","01110","11110","11111","00000"]
     print maximalSquare(matrix)
 
