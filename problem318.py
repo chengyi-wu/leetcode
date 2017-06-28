@@ -1,24 +1,25 @@
+'''
+https://leetcode.com/problems/maximum-product-of-word-lengths/#/description
+'''
+
 def maxProduct(words):
-    bucket = { }
-    for w in words:
+    '''
+    The key to this problem is the bit array to reduce the comparision.
+    https://leetcode.com/submissions/detail/107579748/
+    '''
+    bitarray = words[:]
+    for i,w in enumerate(words):
+        bitarray[i] = 0
         for c in w:
-            if c not in bucket:
-                bucket[c] = []
-            bucket[c].append(w)
-    common = { }
-    for b in bucket:
-        for w1 in bucket[b]:
-            if w1 not in common:
-                common[w1] = []
-            for w2 in bucket[b]:
-                if w1 != w2:
-                    common[w1].append(w2)
-    print common
+            #print c,  ord(c) - ord('a') + 1
+            bitarray[i] |= 1 << ord(c) - ord('a') + 1
+    #print bitarray
     result = 0
-    #for w in words:
-
-
-    print result
+    for i in range(len(words)):
+        for j in range(i + 1, len(words)):
+            if bitarray[i] & bitarray[j] == 0:
+                result = max(result, len(words[i]) * len(words[j]))
+    return result
 
 def test():
     words = ["abcw", "baz", "foo", "bar", "xtfn", "abcdef"]
