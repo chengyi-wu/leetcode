@@ -12,7 +12,6 @@ def firstMissingPositive(nums):
             small[n] = n - 1
         if n + 1 in big:
             big[n] = n + 1
-    segment = []
     missing = []
     for n in nums:
         if n not in h:
@@ -28,14 +27,12 @@ def firstMissingPositive(nums):
                 s = s + [x]
                 h.append(x)
                 x = big[x]
-            segment.append(s)
-    for s in segment:
-        left = s[0]
-        right = s[-1]
-        if left - 1 > 0:
-            missing.append(left - 1)
-        if right + 1 > 0:
-            missing.append(right + 1)
+            left = s[0] - 1
+            right = s[-1] + 1
+            if left > 0:
+                missing.append(left)
+            if right > 0:
+                missing.append(right)
     return min(missing)
 
 def test():
