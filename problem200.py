@@ -28,18 +28,18 @@ def numIslands(grid):
                     y = (i - 1) * col + j
                     if not connected(ids, x, y):
                         union(ids, x, y)
-                if i + 1 < row and grid[i + 1][j] == '1':
-                    y = (i + 1) * col + j
-                    if not connected(ids, x, y):
-                        union(ids, x, y)
                 if j - 1 >= 0 and grid[i][j - 1] == '1':
                     y = i * col + j - 1
                     if not connected(ids, x, y):
                         union(ids, x, y)
-                if j + 1 < col and grid[i][j + 1] == '1':
-                    y = i * col + j + 1
-                    if not connected(ids, x, y):
-                        union(ids, x, y)
+                #if i + 1 < row and grid[i + 1][j] == '1':
+                #    y = (i + 1) * col + j
+                #    if not connected(ids, x, y):
+                #        union(ids, x, y)                
+                #if j + 1 < col and grid[i][j + 1] == '1':
+                #    y = i * col + j + 1
+                #    if not connected(ids, x, y):
+                #        union(ids, x, y)
     print opensites
     roots = []
     for s in opensites:
