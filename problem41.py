@@ -1,4 +1,4 @@
-def firstMissingPositive(nums):
+def firstMissingPositive2(nums):
     if 0 not in nums:
         nums.append(0)
     big = { }
@@ -34,6 +34,22 @@ def firstMissingPositive(nums):
             if right > 0:
                 missing.append(right)
     return min(missing)
+
+def firstMissingPositive(nums):
+    nums.append(0)
+    for i in range(len(nums)):
+        #print i, nums[i], nums[i] - 1
+        pos = nums[i]
+        while pos >= 0 and pos < len(nums) and pos != nums[pos]:
+            t = nums[pos]
+            nums[pos] = pos
+            pos = t
+        print nums
+    for i in range(len(nums)):
+        if nums[i] != i:
+            return i
+
+    return len(nums)
 
 def test():
     nums = [1,2,0]
