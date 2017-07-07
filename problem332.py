@@ -1,6 +1,6 @@
 def dfs(edges, visisted, v):
     '''
-    After all the edges from this node is removed, this node can be added.
+    After all the outgoing edges from this node is removed, this node can be added.
     '''
     results = []
     for i, e in enumerate(edges):
