@@ -13,23 +13,33 @@ def permutation(nums):
     return helper([], nums)
 
 def swap(nums, i, j):
+    #nums[j], nums[i] = nums[i], nums[j]
     t = nums[i]
     nums[i] = nums[j]
     nums[j] = t
-    print "swap",i,j
+    #print "swap",i,j
 
 def nextPermutation(nums):
+    '''
+    1. Scan the sequence from right to left, find the first non-incresing poisition, front.
+    2. Scan the sequence again from right to left, find the first element which is lexically larger than S[front], rear
+    3. Swap the front and rear
+    4. Increment front by one and set the rear to the end
+    5. Swap front and rear respectively till they meet
+    '''
     front = -1
     for i in reversed(range(1, len(nums))):
         if nums[i] > nums[i - 1]:
             front = i - 1
             break
-    rear = len(nums) - 1
-    while nums[front] > nums[rear]:
-        rear -= 1
+    print front 
     if front > -1:
+        rear = len(nums) - 1
+        while nums[front] >= nums[rear]:
+            rear -= 1
         swap(nums, front, rear)
     front += 1
+    rear = len(nums) - 1
     while front < rear:
         swap(nums, front, rear)
         front += 1
@@ -37,14 +47,8 @@ def nextPermutation(nums):
     return ''.join(nums)
 
 if __name__ == '__main__':
-    print permutation("XYZ")
-    print nextPermutation(list('BCA'))
-    #print nextPermutation(list('1234'))
+    #print permutation("XYZ")
+    #print nextPermutation(list('BCA'))
+    print nextPermutation(list('151'))
     #print nextPermutation(list('321'))
-    #nums = list("ABC")
-    #s = ''.join(nums)
-    #v = ''
-    #while s != v:
-    #    v = nextPermutation(nums)
-    #    print v
     
