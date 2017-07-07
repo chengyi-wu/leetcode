@@ -28,15 +28,19 @@ def nextPermutation(nums):
     5. Swap front and rear respectively till they meet
     '''
     front = -1
-    for i in reversed(range(1, len(nums))):
+    for i in reversed(xrange(1, len(nums))):
         if nums[i] > nums[i - 1]:
             front = i - 1
             break
-    print front 
     if front > -1:
         rear = len(nums) - 1
-        while nums[front] >= nums[rear]:
-            rear -= 1
+        #while nums[front] >= nums[rear]:
+        #    rear -= 1
+        #using a for loop instead of while loop
+        for i in reversed(xrange(front + 1, len(nums))):
+            if nums[front] < nums[i]:
+                rear = i
+                break
         swap(nums, front, rear)
     front += 1
     rear = len(nums) - 1
@@ -51,4 +55,10 @@ if __name__ == '__main__':
     #print nextPermutation(list('BCA'))
     print nextPermutation(list('151'))
     #print nextPermutation(list('321'))
-    
+    s = "ABCDE"
+    nums = list(s)
+    t = ""
+    while s != t:
+        t = nextPermutation(nums)
+        print t
+        
