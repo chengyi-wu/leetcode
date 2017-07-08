@@ -5,10 +5,7 @@ def kthSmallest(matrix, k):
     row = len(matrix)
     col = len(matrix[0])
     #list comprehension is much faster
-    nums = [(matrix[i][j], i * col + j ) for i in range(row) for j in range(col)]
-    nums.sort(key=lambda x:x[0])
+    nums = [matrix[i][j] for i in range(row) for j in range(col)]
+    nums.sort()
     
-    n = nums[k - 1][1]
-    y = n % col
-    x = (n - y) // col
-    return matrix[x][y]
+    return nums[k - 1]
