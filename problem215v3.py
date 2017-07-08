@@ -19,16 +19,16 @@ def partition(nums, p, r):
     swap(nums, i, r)
     return i
 
-def select(nums, p, r, i):
+def select(nums, p, r, k):
     if p == r:
         return nums[p]
     q = partition(nums, p, r)
-    k = q - p + 1
+    i = q - p + 1
     if k == i:
         return nums[q]
-    elif i < k:
-        return select(nums, p, q - 1, i)
-    return select(nums, q + 1, r, i - k)
+    elif i > k:
+        return select(nums, p, q - 1, k)
+    return select(nums, q + 1, r, k - i)
 
 def findKthLargest(nums, k):
     return select(nums, 0, len(nums) - 1, k)
