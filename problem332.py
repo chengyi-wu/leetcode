@@ -17,39 +17,11 @@ def findItinerary(tickets):
     '''
     visisted = [False] * len(tickets)
 
-    outgoing = { }
-    incoming = { }
-    for e in tickets:
-        u, v = e[0], e[1]
-        if u not in outgoing:
-            outgoing[u] = 0
-        if v not in incoming:
-            incoming[v] = 0
-        if u not in incoming:
-            incoming[u] = 0
-        if v not in outgoing:
-            outgoing[v] = 0
-        outgoing[u] += 1
-        incoming[v] += 1
-    
-    #print outgoing
-    #print incoming
-
     #sort on the destination, lex order
     tickets.sort(key=lambda x:x[1])
 
-    #I don't know why but Python's dict seesm to be stored in lex order
-    #Chooses a start node where the outgoing degree - incoming degree is ONE
-    #If none, pick the first one in the dict.
-    s = None
-    for v in outgoing:
-        if outgoing[v] - incoming[v] == 1:
-            s = v
-            break
-    if s is None:
-        for v in outgoing:
-            s = v
-            break
+    #The problem asks to set the start at JFK
+    s = 'JFK'
 
     results = []
     while visisted.count(False) > 0:
