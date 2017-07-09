@@ -2,6 +2,10 @@ def merge(l1, l2):
     head = None
     p1 = l1
     p2 = l2
+    if p1 is None:
+        return p2
+    if p2 is None:
+        return p1
     p = None
     while p1 is not None or p2 is not None:
         if p1 is None:
