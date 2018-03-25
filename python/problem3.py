@@ -2,15 +2,14 @@ def lengthOfLongestSubstring(s):
     h = {}
     longest = 0
     sub = 0
+    start = 0
     for i, c in enumerate(s):
         if i > 0:
             if c in h:
                 sub = i - h[c]
-                new_map = {}
-                for k in h:
-                    if h[k] > h[c]:
-                        new_map[k] = h[k]
-                h = new_map
+                for j in range(start, h[c]):
+                    h.pop(s[j], None)
+                start = h[c] + 1
             else:
                 sub += 1
         else:
